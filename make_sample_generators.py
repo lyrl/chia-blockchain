@@ -1,5 +1,5 @@
-
-from src.util.ints import uint32
+from chia.types.spend_bundle import SpendBundle
+from chia.util.ints import uint32
 from pathlib import Path
 
 from tests.core.make_block_generator import make_block_generator
@@ -7,7 +7,7 @@ from chia.wallet.puzzles.load_clvm import load_clvm
 from chia.types.blockchain_format.program import Program
 from clvm import SExp
 from clvm_tools import binutils
-from chia.full_node.bundle_tools import best_solution_program, compressed_solution_program
+from chia.full_node.bundle_tools import best_solution_program
 
 CGEN = load_clvm("cgen.clvm", package_or_requirement="src.wallet.puzzles")
 
@@ -31,7 +31,7 @@ def compress_spend_bundle_program(sb: Program):
 
 def compress_gen(g: Program):
     sb = Program.from_bytes(bytes(g)).rest()
-    csb = compress_spend_bundle_programo(sb)
+    csb = compress_spend_bundle_program(sb)
     #print(csb)
     #cgen = SerializedProgram.from_bytes(SExp.to([binutils.assemble("#a"), CGEN, csb])).as_bin())
     #cgen = Program.to([binutils.assemble("#a"), quote(CGEN), quote([csb])])
